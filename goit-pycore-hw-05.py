@@ -454,11 +454,13 @@ Enter a command:
 from termcolor import colored
 from typing import Callable, Any
 import os
+from functools import wraps
 
 path = "./contacts.txt"
 
 # add error decorator
 def input_error(func: Callable[..., Any]) -> Callable[..., Any]:
+    @wraps(func)
     def inner(*args, **kwargs):
         try:
             return func(*args, **kwargs)
